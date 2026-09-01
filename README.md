@@ -36,7 +36,7 @@ A simple password-protected static website hosted on GitHub Pages.
 
 ## Password
 
-The site password is: **lagtsgny**
+The site password is: **password_goes_here**
 
 Once entered correctly, it stays unlocked for the current browser session.
 
