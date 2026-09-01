@@ -3,7 +3,7 @@
 A simple password-protected static website hosted on GitHub Pages.
 
 - Background image with two buttons linking to OneDrive Audio and Videos folders.
-- Client-side password protection (password: `lagtsgny`).
+- Client-side password protection (password: `password_goes_here`).
 
 ## Files
 
