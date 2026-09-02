@@ -84,7 +84,7 @@
     #content {
       display: none;
       min-height: 100vh;
-      background: url('background.jpg') center/cover no-repeat fixed;
+      background: url('background.jpg') center center / cover no-repeat;
       background-color: #1a1a2e;
       position: relative;
     }
@@ -102,19 +102,19 @@
       align-items: center;
       justify-content: center;
       text-align: center;
-      padding: 2rem;
+      padding: 2rem 1.25rem;
     }
     h1 {
       color: white;
       font-size: clamp(1.6rem, 5vw, 2.4rem);
-      margin-bottom: 2.5rem;
+      margin-bottom: 2.2rem;
       text-shadow: 0 2px 10px rgba(0,0,0,0.7);
       font-weight: 600;
       letter-spacing: 0.02em;
     }
     .buttons {
       display: flex;
-      gap: 1.5rem;
+      gap: 1.25rem;
       flex-wrap: wrap;
       justify-content: center;
     }
@@ -142,6 +142,47 @@
       transform: translateY(-4px);
       box-shadow: 0 10px 25px rgba(0,0,0,0.35);
     }
+
+    /* ===== Mobile improvements ===== */
+    @media (max-width: 600px) {
+      #content {
+        /* Remove fixed attachment – it causes bad cropping on phones */
+        background-attachment: scroll;
+        background-position: center center;
+      }
+
+      .container {
+        padding: 1.5rem 1rem;
+      }
+
+      h1 {
+        font-size: 1.7rem;
+        margin-bottom: 1.8rem;
+      }
+
+      .buttons {
+        flex-direction: column;   /* stack buttons vertically */
+        gap: 1rem;
+        width: 100%;
+        max-width: 280px;
+      }
+
+      a.btn {
+        width: 100%;
+        min-width: 0;
+        padding: 0.95rem 1.5rem;
+        font-size: 1.1rem;
+        border-radius: 12px;
+      }
+    }
+
+    /* Extra small phones */
+    @media (max-width: 380px) {
+      a.btn {
+        padding: 0.85rem 1.2rem;
+        font-size: 1.05rem;
+      }
+    }
   </style>
 </head>
 <body>
@@ -159,7 +200,7 @@
     </div>
   </div>
 
-  <!-- Protected Content (hidden until password is correct) -->
+  <!-- Protected Content -->
   <div id="content">
     <div class="overlay"></div>
     <div class="container">
@@ -176,7 +217,6 @@
   </div>
 
   <script>
-    // SHA-256 hash of the password "lagtsgny"
     const PASSWORD_HASH = "25195bd00125ad40dd333f3f39aacb4c40d3935acd9115f3c6e448527becbf03";
 
     async function sha256(message) {
@@ -186,7 +226,6 @@
       return hashArray.map(b => b.toString(16).padStart(2, "0")).join("");
     }
 
-    // Remember successful unlock for this browser session
     if (sessionStorage.getItem("unlocked") === "true") {
       showContent();
     }
